@@ -40,7 +40,6 @@ void EjercicioCardio::mostrarDetalles() const {
     cout << "Intensidad: " << nivelIntensidad << endl;
     cout << "Tiempo estimado: " << tiempoEstimado << " minutos" << endl;
     cout << "Descripcion: " << descripcion << endl;
-    cout << "Ultima semana usado: " << ultimaSemanaUsado << endl;
 }
 
 // ---- Rutina ----
