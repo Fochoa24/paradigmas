@@ -6,9 +6,14 @@
 
 using namespace std;
 
+
+
+
+
+
 // ---- Ejercicio ----
 
-Ejercicio::Ejercicio(string id, string nom, string nivel, int tiempo, string desc, int semana)
+Ejercicio::Ejercicio(const string& id, const string& nom, const string& nivel, int tiempo, const string& desc, int semana)
     : codigoID(id), nombre(nom), nivelIntensidad(nivel), tiempoEstimado(tiempo),
       descripcion(desc), ultimaSemanaUsado(semana) {}
 
@@ -40,7 +45,7 @@ void EjercicioCardio::mostrarDetalles() const {
 
 // ---- Rutina ----
 
-Rutina::Rutina(string cliente) : nombreCliente(cliente), duracionTotal(0) {}
+Rutina::Rutina(const string& cliente) : nombreCliente(cliente), duracionTotal(0) {}
 
 Rutina::~Rutina() {}
 
@@ -48,14 +53,23 @@ void Rutina::agregarEjercicio(Ejercicio* ej) {
     listaEjercicios.push_back(ej);
     duracionTotal += ej->obtenerTiempo();
 }
-
 int Rutina::calcularTiempoTotal() {
     return duracionTotal;
 }
 
+
+
+
+
+
+
+
+
+
+
 void Rutina::mostrarRutina() const {
-    cout << "Rutina de: " << nombreCliente << endl;
-    for (int i = 0; i < listaEjercicios.size(); i++) {
+    cout << "\nRutina de: " << nombreCliente << endl;
+    for (size_t i = 0; i < listaEjercicios.size(); i++) {
         listaEjercicios[i]->mostrarDetalles();
         cout << "--------------------------" << endl;
     }
@@ -67,7 +81,7 @@ void Rutina::mostrarRutina() const {
 SistemaGestion::SistemaGestion() {}
 
 SistemaGestion::~SistemaGestion() {
-    for (int i = 0; i < baseDeDatosEjercicios.size(); i++) {
+    for (size_t i = 0; i < baseDeDatosEjercicios.size(); i++) {
         delete baseDeDatosEjercicios[i];
     }
 }
@@ -93,8 +107,19 @@ void SistemaGestion::crearEjercicio() {
     cout << "Ejercicio creado." << endl;
 }
 
-void SistemaGestion::actualizarEjercicio(string id) {
-    for (int i = 0; i < baseDeDatosEjercicios.size(); i++) {
+
+
+
+
+
+
+
+
+
+
+
+void SistemaGestion::actualizarEjercicio(const string& id) {
+    for (size_t i = 0; i < baseDeDatosEjercicios.size(); i++) {
         if (baseDeDatosEjercicios[i]->obtenerCodigo() == id) {
             int nuevaSemana;
             cout << "Nueva semana de uso: ";
@@ -107,8 +132,8 @@ void SistemaGestion::actualizarEjercicio(string id) {
     cout << "Ejercicio no encontrado." << endl;
 }
 
-void SistemaGestion::eliminarEjercicio(string id) {
-    for (int i = 0; i < baseDeDatosEjercicios.size(); i++) {
+void SistemaGestion::eliminarEjercicio(const string& id) {
+    for (size_t i = 0; i < baseDeDatosEjercicios.size(); i++) {
         if (baseDeDatosEjercicios[i]->obtenerCodigo() == id) {
             delete baseDeDatosEjercicios[i];
             baseDeDatosEjercicios.erase(baseDeDatosEjercicios.begin() + i);
@@ -119,8 +144,28 @@ void SistemaGestion::eliminarEjercicio(string id) {
     cout << "Ejercicio no encontrado." << endl;
 }
 
-void SistemaGestion::buscarPorIntensidad(string nivel) {
-    for (int i = 0; i < baseDeDatosEjercicios.size(); i++) {
+void SistemaGestion::consultarEjercicio(const string& id) {
+    for (size_t i = 0; i < baseDeDatosEjercicios.size(); i++) {
+        if (baseDeDatosEjercicios[i]->obtenerCodigo() == id) {
+            baseDeDatosEjercicios[i]->mostrarDetalles();
+            return;
+        }
+    }
+    cout << "Ejercicio no encontrado." << endl;
+}
+
+
+
+
+
+
+
+
+
+
+
+void SistemaGestion::buscarPorIntensidad(const string& nivel) {
+    for (size_t i = 0; i < baseDeDatosEjercicios.size(); i++) {
         if (baseDeDatosEjercicios[i]->obtenerNivel() == nivel) {
             baseDeDatosEjercicios[i]->mostrarDetalles();
             cout << "--------------------------" << endl;
@@ -130,21 +175,35 @@ void SistemaGestion::buscarPorIntensidad(string nivel) {
 
 void SistemaGestion::generarRutina() {
     string cliente, nivel;
-    int cantidad;
+    int cantidad, semanaActual;
     cout << "Nombre del cliente: "; cin.ignore(); getline(cin, cliente);
     cout << "Nivel de intensidad deseado: "; getline(cin, nivel);
     cout << "Cantidad de ejercicios: "; cin >> cantidad;
+    cout << "Semana actual: "; cin >> semanaActual;
 
     Rutina rutina(cliente);
     int contador = 0;
-    for (int i = 0; i < baseDeDatosEjercicios.size() && contador < cantidad; i++) {
-        if (baseDeDatosEjercicios[i]->obtenerNivel() == nivel) {
+    for (size_t i = 0; i < baseDeDatosEjercicios.size() && contador < cantidad; i++) {
+        if (baseDeDatosEjercicios[i]->obtenerNivel() == nivel &&
+            baseDeDatosEjercicios[i]->obtenerUltimaSemana() != semanaActual - 1) {
             rutina.agregarEjercicio(baseDeDatosEjercicios[i]);
             contador++;
         }
     }
     rutina.mostrarRutina();
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 void SistemaGestion::ejecutarMenu() {
     int opcion;
@@ -153,8 +212,9 @@ void SistemaGestion::ejecutarMenu() {
         cout << "1. Crear ejercicio" << endl;
         cout << "2. Actualizar ejercicio" << endl;
         cout << "3. Eliminar ejercicio" << endl;
-        cout << "4. Buscar por intensidad" << endl;
-        cout << "5. Generar rutina" << endl;
+        cout << "4. Consultar ejercicio" << endl;
+        cout << "5. Buscar por intensidad" << endl;
+        cout << "6. Generar rutina" << endl;
         cout << "0. Salir" << endl;
         cout << "Opcion: ";
         cin >> opcion;
@@ -168,9 +228,12 @@ void SistemaGestion::ejecutarMenu() {
             string id; cout << "ID a eliminar: "; cin >> id;
             eliminarEjercicio(id);
         } else if (opcion == 4) {
+            string id; cout << "ID a consultar: "; cin >> id;
+            consultarEjercicio(id);
+        } else if (opcion == 5) {
             string nivel; cout << "Nivel: "; cin.ignore(); getline(cin, nivel);
             buscarPorIntensidad(nivel);
-        } else if (opcion == 5) {
+        } else if (opcion == 6) {
             generarRutina();
         }
     } while (opcion != 0);

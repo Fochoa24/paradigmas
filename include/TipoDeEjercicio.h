@@ -6,20 +6,20 @@
 // Clase para ejercicios de Fuerza
 class EjercicioFuerza : public Ejercicio {
 public:
-    EjercicioFuerza(string id, string nom, string nivel, int tiempo, string desc, int semana)
+    EjercicioFuerza(const std::string& id, const std::string& nom, const std::string& nivel, int tiempo, const std::string& desc, int semana)
         : Ejercicio(id, nom, nivel, tiempo, desc, semana) {}
 
-    // Implementación de polimorfismo 
+    // Implementacion de polimorfismo
     void mostrarDetalles() const override;
 };
 
 // Clase para ejercicios Cardiovasculares
 class EjercicioCardio : public Ejercicio {
 public:
-    EjercicioCardio(string id, string nom, string nivel, int tiempo, string desc, int semana)
+    EjercicioCardio(const std::string& id, const std::string& nom, const std::string& nivel, int tiempo, const std::string& desc, int semana)
         : Ejercicio(id, nom, nivel, tiempo, desc, semana) {}
 
-    // Implementación de polimorfismo 
+    // Implementacion de polimorfismo
     void mostrarDetalles() const override;
 };
 
