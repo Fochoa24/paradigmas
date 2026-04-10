@@ -2,7 +2,8 @@
 #include <vector>
 #include <string>
 
-#include <Ejercicio.h>
+#include "include/Ejercicio.h"
+#include "include/TipoDeEjercicio.h"
 
 using namespace std;
 
@@ -15,7 +16,7 @@ int main() {
 
     for (int i=0; i < n; i++){
         int opcion;
-        int id, tiempo, ultimaSemana
+        int id, tiempo, ultimaSemana;
         string nombre, intensidad, descripcion;
 
         cout << "\nEjercicio #" << i + 1 << endl;
@@ -39,9 +40,9 @@ int main() {
         cin >> ultimaSemana;
 
         if (opcion == 1) {
-            ejercicios.push_back(new EjercicioCardio(id, nombre, intensidad, tiempo, descripcion, ultimaSemana));
+            ejercicios.push_back(new EjercicioCardio(to_string(id), nombre, intensidad, tiempo, descripcion, ultimaSemana));
         } else if (opcion == 2) {
-            ejercicios.push_back(new EjercicioFuerza(id, nombre, intensidad, tiempo, descripcion, ultimaSemana));
+            ejercicios.push_back(new EjercicioFuerza(to_string(id), nombre, intensidad, tiempo, descripcion, ultimaSemana));
         } else {
             cout << "Opcion invalida. No se registrara este ejercicio." << endl;
         }
@@ -49,7 +50,7 @@ int main() {
 
     cout << "\nLISTADO DE EJERCICIOS" << endl;
     for (int i = 0; i < ejercicios.size(); i++) {
-        ejercicios[i]->mostrarDatos();
+        ejercicios[i]->mostrarDetalles();
         cout << "--------------------------" << endl;
     }
 
@@ -63,9 +64,9 @@ int main() {
 
     int contador = 0;
     for (int i = 0; i < ejercicios.size(); i++) {
-        if (ejercicios[i]->intensidad == nivelDeseado && contador < cantSolicitada) {
-            ejercicios[i]->mostrarDatos();
-            tiempoTotal += ejercicios[i]->tiempo;
+        if (ejercicios[i]->obtenerNivel() == nivelDeseado && contador < cantSolicitada) {
+            ejercicios[i]->mostrarDetalles();
+            tiempoTotal += ejercicios[i]->obtenerTiempo();
             contador++;
         }
     }

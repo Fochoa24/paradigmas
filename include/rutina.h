@@ -2,7 +2,7 @@
 #define RUTINA_H
 
 #include <vector>
-#include "ejercicio.h"
+#include "Ejercicio.h"
 
 class Rutina {
 private:

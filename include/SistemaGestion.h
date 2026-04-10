@@ -2,8 +2,8 @@
 #define SISTEMAGESTION_H
 
 #include <vector>
-#include "ejercicio.h"
-#include "rutina.h"
+#include "Ejercicio.h"
+#include "Rutina.h"
 
 class SistemaGestion {
 private:

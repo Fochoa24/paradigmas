@@ -1,7 +1,7 @@
 #ifndef TIPOS_DE_EJERCICIO_H
 #define TIPOS_DE_EJERCICIO_H
 
-#include "ejercicio.h"
+#include "Ejercicio.h"
 
 // Clase para ejercicios de Fuerza
 class EjercicioFuerza : public Ejercicio {
