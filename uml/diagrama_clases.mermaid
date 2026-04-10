@@ -1,0 +1,60 @@
+classDiagram
+    direction TB
+
+    class Ejercicio {
+        <<abstract>>
+        #string codigoID
+        #string nombre
+        #string nivelIntensidad
+        #int tiempoEstimado
+        #string descripcion
+        #int ultimaSemanaUsado
+        +Ejercicio(string id, string nom, string nivel, int tiempo, string desc, int semana)
+        +~Ejercicio()
+        +obtenerCodigo() string
+        +obtenerNombre() string
+        +obtenerNivel() string
+        +obtenerTiempo() int
+        +obtenerUltimaSemana() int
+        +actualizarSemana(int nuevaSemana) void
+        +mostrarDetalles()* void
+    }
+
+    class EjercicioFuerza {
+        +EjercicioFuerza(string id, string nom, string nivel, int tiempo, string desc, int semana)
+        +mostrarDetalles() void
+    }
+
+    class EjercicioCardio {
+        +EjercicioCardio(string id, string nom, string nivel, int tiempo, string desc, int semana)
+        +mostrarDetalles() void
+    }
+
+    class Rutina {
+        -string nombreCliente
+        -vector~Ejercicio*~ listaEjercicios
+        -int duracionTotal
+        +Rutina(string cliente)
+        +~Rutina()
+        +agregarEjercicio(Ejercicio* ej) void
+        +calcularTiempoTotal() int
+        +mostrarRutina() void
+    }
+
+    class SistemaGestion {
+        -vector~Ejercicio*~ baseDeDatosEjercicios
+        +SistemaGestion()
+        +~SistemaGestion()
+        +crearEjercicio() void
+        +actualizarEjercicio(string id) void
+        +eliminarEjercicio(string id) void
+        +buscarPorIntensidad(string nivel) void
+        +generarRutina() void
+        +ejecutarMenu() void
+    }
+
+    Ejercicio <|-- EjercicioFuerza : Herencia
+    Ejercicio <|-- EjercicioCardio : Herencia
+    Rutina o-- "0..*" Ejercicio : Agregación
+    SistemaGestion *-- "0..*" Ejercicio : Composición
+    SistemaGestion ..> Rutina : usa / crea

@@ -2,19 +2,18 @@
 #define RUTINA_H
 
 #include <vector>
-#include "ejercicio.h"
+#include "Ejercicio.h"
 
 class Rutina {
 private:
-    string nombreCliente;
-    vector<Ejercicio*> listaEjercicios; // Asociación por agregación
-    int duracionTotal; // Suma de los tiempos de cada ejercicio
+    std::string nombreCliente;
+    std::vector<Ejercicio*> listaEjercicios; // Asociacion por agregacion
+    int duracionTotal;
 
 public:
-    Rutina(string cliente);
+    Rutina(const std::string& cliente);
     ~Rutina();
 
-    // Requerimiento: Generar rutina y calcular tiempo total
     void agregarEjercicio(Ejercicio* ej);
     int calcularTiempoTotal();
     void mostrarRutina() const;

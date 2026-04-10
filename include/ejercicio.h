@@ -4,36 +4,32 @@
 #include <iostream>
 #include <string>
 
-using namespace std;
-
-// Clase base abstracta para representar un ejercicio genérico
+// Clase base abstracta para representar un ejercicio generico
 class Ejercicio {
 protected:
-    // Atributos obligatorios según el enunciado
-    string codigoID;
-    string nombre;
-    string nivelIntensidad; // Básico, Intermedio, Avanzado, Alto rendimiento
-    int tiempoEstimado;    // En minutos
-    string descripcion;
-    int ultimaSemanaUsado; // Para evitar repetición en semanas consecutivas
+    std::string codigoID;
+    std::string nombre;
+    std::string nivelIntensidad; // Basico, Intermedio, Avanzado, Alto rendimiento
+    int tiempoEstimado;          // En minutos
+    std::string descripcion;
+    int ultimaSemanaUsado;       // Para evitar repeticion en semanas consecutivas
 
 public:
-    // Constructor y Destructor
-    Ejercicio(string id, string nom, string nivel, int tiempo, string desc, int semana);
+    Ejercicio(const std::string& id, const std::string& nom, const std::string& nivel, int tiempo, const std::string& desc, int semana);
     virtual ~Ejercicio();
-    
-    // Métodos Getters (para consultar información)
-    string obtenerCodigo() const { return codigoID; }
-    string obtenerNombre() const { return nombre; }
-    string obtenerNivel() const { return nivelIntensidad; }
+
+    // Getters
+    std::string obtenerCodigo() const { return codigoID; }
+    std::string obtenerNombre() const { return nombre; }
+    std::string obtenerNivel() const { return nivelIntensidad; }
     int obtenerTiempo() const { return tiempoEstimado; }
     int obtenerUltimaSemana() const { return ultimaSemanaUsado; }
 
-    // Métodos Setters (para actualizar información)
+    // Setter
     void actualizarSemana(int nuevaSemana) { ultimaSemanaUsado = nuevaSemana; }
 
-    // Método virtual puro: hace que la clase sea abstracta y obliga al polimorfismo
-    virtual void mostrarDetalles() const = 0; 
+    // Metodo virtual puro: hace que la clase sea abstracta y obliga al polimorfismo
+    virtual void mostrarDetalles() const = 0;
 };
 
 #endif
