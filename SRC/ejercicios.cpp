@@ -23,12 +23,11 @@ Ejercicio::~Ejercicio() {}
 
 void EjercicioFuerza::mostrarDetalles() const {
     cout << "[Fuerza]" << endl;
-    cout << "ID:" << codigoID << endl;
+    cout << "ID: " << codigoID << endl;
     cout << "Nombre: " << nombre << endl;
     cout << "Intensidad: " << nivelIntensidad << endl;
     cout << "Tiempo estimado: " << tiempoEstimado << " minutos" << endl;
     cout << "Descripcion: " << descripcion << endl;
-    cout << "Ultima semana usado: " << ultimaSemanaUsado << endl;
 }
 
 // ---- EjercicioCardio ----
